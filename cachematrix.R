@@ -1,3 +1,10 @@
+# makeCacheMatrix and cacheSolve save computational time by caching
+# the matrix inverse and returning the previously calculated value
+# if previously calculated
+
+# makeCacheMatrix declares a list with set, get, setinverse 
+# and getinverse functions
+
 makeCacheMatrix <- function(x = matrix()) {
     m <- NULL
     set <- function(y) {
@@ -7,8 +14,12 @@ makeCacheMatrix <- function(x = matrix()) {
     get <- function() x
     setinverse <- function(solve) m <<- solve
     getinverse <- function() m
-    list(set = set, get = get, setinverse = setinverse, getinverse = getinverse)
+    list(set = set, get = get, 
+         setinverse = setinverse, getinverse = getinverse)
 }
+
+# cacheSolve returns either the cached value of the matrix inverse
+# or calculates the inverse if not previously calculated
 
 cacheSolve <- function(x, ...) {
     m <- x$getinverse()
